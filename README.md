@@ -49,9 +49,6 @@
     <a href="https://discord.gg/5rPsrAzK7S">
       <img src="https://img.shields.io/discord/1022748306096537660?style=flat-square&logo=discord&label=Discord&color=5865F2" alt="Discord">
     </a>
-    <a href="https://crowdin.com/project/casdoor-site">
-      <img src="https://badges.crowdin.net/casdoor-site/localized.svg" alt="Crowdin">
-    </a>
   </p>
 
   <p align="center">
@@ -81,6 +78,7 @@
 ---
 
 <a id="why-casdoor"></a>
+
 ## Why Casdoor
 
 Casdoor is a **UI-first** identity provider and access management platform: one place to manage users, organizations, applications, and providers, with a modern web console. Authorization policies can be expressed with **[Casbin](https://casbin.org/)** (ACL, RBAC, ABAC, and more). Unlike reverse-proxy-centric auth companions, Casdoor is a dedicated auth server with broad protocol support, designed to be straightforward to self-host and integrate—see **[casdoor.ai](https://casdoor.ai)** for documentation.
@@ -88,18 +86,20 @@ Casdoor is a **UI-first** identity provider and access management platform: one 
 ---
 
 <a id="live-demos"></a>
+
 ## 🌐 Live demos
 
-| Environment | URL | Description |
-|-------------|-----|-------------|
+| Environment   | URL                                          | Description                                                                 |
+| ------------- | -------------------------------------------- | --------------------------------------------------------------------------- |
 | **Read-only** | [door.casdoor.com](https://door.casdoor.com) | Global demo; **any modification or write operation will fail** (read-only). |
-| **Writable** | [demo.casdoor.com](https://demo.casdoor.com) | Full access for testing; **data is reset about every 5 minutes**. |
+| **Writable**  | [demo.casdoor.com](https://demo.casdoor.com) | Full access for testing; **data is reset about every 5 minutes**.           |
 
 Default demo admin login (where applicable): `admin` / `123` — use only for demos; change credentials on your own deployment.
 
 ---
 
 <a id="quick-start"></a>
+
 ## 🚀 Quick start
 
 Pick one deployment method below. To keep behavior consistent with upstream, the steps are aligned with official docs.
@@ -164,6 +164,7 @@ Official guide: [Try with Helm](https://casdoor.ai/docs/basic/try-with-helm)
 ---
 
 <a id="features"></a>
+
 ## ✨ Features
 
 <table>
@@ -222,6 +223,7 @@ Official guide: [Try with Helm](https://casdoor.ai/docs/basic/try-with-helm)
 ---
 
 <a id="technology-stack"></a>
+
 ## Technology stack
 
 Casdoor is built as a **frontend–backend separated** project:
@@ -234,6 +236,7 @@ Casdoor is built as a **frontend–backend separated** project:
 ---
 
 <a id="documentation"></a>
+
 ## 📖 Documentation
 
 **All product documentation, installation, and tutorials live at [casdoor.ai/docs/overview](https://casdoor.ai/docs/overview).** Start here, then use the sections below.
@@ -256,6 +259,7 @@ Casdoor is built as a **frontend–backend separated** project:
 ---
 
 <a id="integrations"></a>
+
 ## 🔌 Integrations
 
 Casdoor integrates with common languages and frameworks:
@@ -275,6 +279,7 @@ Browse the full list: [Integrations](https://casdoor.ai/docs/category/integratio
 ---
 
 <a id="community-and-support"></a>
+
 ## 🤝 Community and support
 
 - **Discord**: [Join our community](https://discord.gg/5rPsrAzK7S)
@@ -285,6 +290,7 @@ Browse the full list: [Integrations](https://casdoor.ai/docs/category/integratio
 ---
 
 <a id="contributing"></a>
+
 ## 🌍 Contributing
 
 If you have questions about Casdoor, you can **[open an issue](https://github.com/casdoor/casdoor/issues)**. Pull requests are welcome; **we recommend opening an issue first** so you can align with maintainers and the community before larger changes.
@@ -293,12 +299,13 @@ Please also read our [contribution guidelines](https://casdoor.ai/docs/contribut
 
 ### Translation and i18n
 
-- **Crowdin** is used for translation workflows: [casdoor-site on Crowdin](https://crowdin.com/project/casdoor-site).
+- **Crowdin** is used for translation workflows: [hcp-casdoor on Crowdin](https://crowdin.com/project/hcp-casdoor).
 - The web app uses **i18next**. When you add or change user-visible strings under [`web/`](https://github.com/casdoor/casdoor/tree/master/web), update the English catalog at [`web/src/locales/en/data.json`](web/src/locales/en/data.json) accordingly.
 
 ---
 
 <a id="license"></a>
+
 ## 📄 License
 
 Casdoor is licensed under the [Apache License 2.0](https://github.com/casdoor/casdoor/blob/master/LICENSE).
