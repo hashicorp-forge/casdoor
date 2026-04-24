@@ -1,56 +1,61 @@
 name: Crowdin Action
 
 on:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  CROWDIN_PROJECT_ID: "892410"
 
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
-    if: github.repository == 'casdoor/casdoor' && github.event_name == 'push'
     steps:
 
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: crowdin action
-      uses: crowdin/github-action@1.4.8
-      with:
-        upload_translations: true
+      - name: crowdin action
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: true
+          upload_translations: true
+          download_translations: true
+          push_translations: true
+          commit_message: "refactor: New Crowdin translations by Github Action"
 
-        download_translations: true
-        push_translations: true
-        commit_message: 'refactor: New Crowdin translations by Github Action'
+          localization_branch_name: l10n_crowdin_action
+          create_pull_request: true
+          pull_request_title: "refactor: New Crowdin translations"
+          pull_request_base_branch_name: "master"
 
-        localization_branch_name: l10n_crowdin_action
-        create_pull_request: true
-        pull_request_title: 'refactor: New Crowdin translations'
+          crowdin_branch_name: l10n_branch
+          config: "./web/crowdin.yml"
 
-        crowdin_branch_name: l10n_branch
-        config: './web/crowdin.yml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        CROWDIN_PROJECT_ID: '463556'
-        CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - name: crowdin backend action
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: true
+          upload_translations: true
+          download_translations: true
+          push_translations: true
+          commit_message: "refactor: New Crowdin Backend translations by Github Action"
 
-    - name: crowdin backend action
-      uses: crowdin/github-action@1.4.8
-      with:
-        upload_translations: true
+          localization_branch_name: l10n_crowdin_action
+          create_pull_request: true
+          pull_request_title: "refactor: New Crowdin Backend translations"
+          pull_request_base_branch_name: "master"
 
-        download_translations: true
-        push_translations: true
-        commit_message: 'refactor: New Crowdin Backend translations by Github Action'
+          crowdin_branch_name: l10n_branch
+          config: "./crowdin.yml"
 
-        localization_branch_name: l10n_crowdin_action
-        create_pull_request: true
-        pull_request_title: 'refactor: New Crowdin Backend translations'
-
-        crowdin_branch_name: l10n_branch
-        config: './crowdin.yml'
-
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        CROWDIN_PROJECT_ID: '463556'
-        CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
