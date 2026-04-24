@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React, { Component, Suspense, lazy } from "react";
+import React, {Component, Suspense, lazy} from "react";
 import "./App.less";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import * as Setting from "./Setting";
-import { setOrgIsTourVisible, setTourLogo } from "./TourConfig";
+import {setOrgIsTourVisible, setTourLogo} from "./TourConfig";
 import {
   StyleProvider,
-  legacyLogicalPropertiesTransformer,
+  legacyLogicalPropertiesTransformer
 } from "@ant-design/cssinjs";
 import {
   GithubOutlined,
   InfoCircleFilled,
-  ShareAltOutlined,
+  ShareAltOutlined
 } from "@ant-design/icons";
 import {
   Alert,
@@ -34,13 +34,13 @@ import {
   FloatButton,
   Layout,
   Result,
-  Tooltip,
+  Tooltip
 } from "antd";
-import { AiDots } from "./common/Loading";
-import { Route, Switch, withRouter } from "react-router-dom";
+import {AiDots} from "./common/Loading";
+import {Route, Switch, withRouter} from "react-router-dom";
 import CustomGithubCorner from "./common/CustomGithubCorner";
 import * as Conf from "./Conf";
-import { shadcnThemeComponents, shadcnThemeToken } from "./shadcnTheme";
+import {shadcnThemeComponents, shadcnThemeToken} from "./shadcnTheme";
 
 import * as Auth from "./auth/Auth";
 import EntryPage from "./EntryPage";
@@ -49,11 +49,11 @@ import AuthCallback from "./auth/AuthCallback";
 import SamlCallback from "./auth/SamlCallback";
 import TelegramLogin from "./auth/TelegramLogin";
 import i18next from "i18next";
-import { withTranslation } from "react-i18next";
+import {withTranslation} from "react-i18next";
 const ManagementPage = lazy(() => import("./ManagementPage"));
-const { Footer, Content } = Layout;
+const {Footer, Content} = Layout;
 
-import { setTwoToneColor } from "@ant-design/icons";
+import {setTwoToneColor} from "@ant-design/icons";
 import * as ApplicationBackend from "./backend/ApplicationBackend";
 import * as Cookie from "cookie";
 
@@ -167,7 +167,7 @@ class App extends Component {
     if (this.state.account !== prevState.account) {
       const requiredEnableMfa = Setting.isRequiredEnableMfa(
         this.state.account,
-        this.state.account?.organization,
+        this.state.account?.organization
       );
       this.setState({
         requiredEnableMfa: requiredEnableMfa,
@@ -177,7 +177,7 @@ class App extends Component {
         const mfaType = Setting.getMfaItemsByRules(
           this.state.account,
           this.state.account?.organization,
-          [Setting.MfaRuleRequired],
+          [Setting.MfaRuleRequired]
         ).find((item) => item.rule === Setting.MfaRuleRequired)?.name;
         if (mfaType !== undefined) {
           this.props.history.push(`/mfa/setup?mfaType=${mfaType}`, {
@@ -246,7 +246,7 @@ class App extends Component {
     ];
 
     const count = navItems.filter((item) =>
-      validMenuItems.includes(item),
+      validMenuItems.includes(item)
     ).length;
     return count <= Conf.MaxItemsForFlatMenu;
   }
@@ -411,13 +411,13 @@ class App extends Component {
     // Check if menu should be flattened and use appropriate key selection
     if (this.shouldFlattenMenu()) {
       const selectedKey = this.getSelectedMenuKeyForFlatMenu(uri);
-      this.setState({ selectedMenuKey: selectedKey });
+      this.setState({selectedMenuKey: selectedKey});
       return;
     }
 
     // Original logic for grouped menu
     if (uri === "/" || uri.includes("/shortcuts") || uri.includes("/apps")) {
-      this.setState({ selectedMenuKey: "/home" });
+      this.setState({selectedMenuKey: "/home"});
     } else if (
       uri.includes("/organizations") ||
       uri.includes("/trees") ||
@@ -425,7 +425,7 @@ class App extends Component {
       uri.includes("/users") ||
       uri.includes("/invitations")
     ) {
-      this.setState({ selectedMenuKey: "/orgs" });
+      this.setState({selectedMenuKey: "/orgs"});
     } else if (
       uri.includes("/applications") ||
       uri.includes("/providers") ||
@@ -433,7 +433,7 @@ class App extends Component {
       uri.includes("/certs") ||
       uri.includes("/keys")
     ) {
-      this.setState({ selectedMenuKey: "/identity" });
+      this.setState({selectedMenuKey: "/identity"});
     } else if (
       uri.includes("/agents") ||
       uri.includes("/servers") ||
@@ -442,7 +442,7 @@ class App extends Component {
       uri.includes("/sites") ||
       uri.includes("/rules")
     ) {
-      this.setState({ selectedMenuKey: "/gateway" });
+      this.setState({selectedMenuKey: "/gateway"});
     } else if (
       uri.includes("/roles") ||
       uri.includes("/permissions") ||
@@ -450,14 +450,14 @@ class App extends Component {
       uri.includes("/adapters") ||
       uri.includes("/enforcers")
     ) {
-      this.setState({ selectedMenuKey: "/auth" });
+      this.setState({selectedMenuKey: "/auth"});
     } else if (
       uri.includes("/records") ||
       uri.includes("/tokens") ||
       uri.includes("/sessions") ||
       uri.includes("/verifications")
     ) {
-      this.setState({ selectedMenuKey: "/logs" });
+      this.setState({selectedMenuKey: "/logs"});
     } else if (
       uri.includes("/product-store") ||
       uri.includes("/products") ||
@@ -468,7 +468,7 @@ class App extends Component {
       uri.includes("/subscriptions") ||
       uri.includes("/transactions")
     ) {
-      this.setState({ selectedMenuKey: "/business" });
+      this.setState({selectedMenuKey: "/business"});
     } else if (
       uri.includes("/sysinfo") ||
       uri.includes("/forms") ||
@@ -477,15 +477,15 @@ class App extends Component {
       uri.includes("/webhook-events") ||
       uri.includes("/tickets")
     ) {
-      this.setState({ selectedMenuKey: "/admin" });
+      this.setState({selectedMenuKey: "/admin"});
     } else if (uri.includes("/signup")) {
-      this.setState({ selectedMenuKey: "/signup" });
+      this.setState({selectedMenuKey: "/signup"});
     } else if (uri.includes("/login")) {
-      this.setState({ selectedMenuKey: "/login" });
+      this.setState({selectedMenuKey: "/login"});
     } else if (uri.includes("/result")) {
-      this.setState({ selectedMenuKey: "/result" });
+      this.setState({selectedMenuKey: "/result"});
     } else {
-      this.setState({ selectedMenuKey: -1 });
+      this.setState({selectedMenuKey: -1});
     }
   }
 
@@ -547,7 +547,7 @@ class App extends Component {
         let storageThemeAlgorithm = [];
         try {
           storageThemeAlgorithm = JSON.parse(
-            localStorage.getItem("themeAlgorithm"),
+            localStorage.getItem("themeAlgorithm")
           );
         } catch {
           storageThemeAlgorithm = ["default"];
@@ -625,7 +625,7 @@ class App extends Component {
         }
         this.setTheme(
           Setting.getThemeData(account.organization),
-          Conf.InitThemeAlgorithm,
+          Conf.InitThemeAlgorithm
         );
         setTourLogo(account.organization.logo);
         setOrgIsTourVisible(account.organization.enableTour);
@@ -633,7 +633,7 @@ class App extends Component {
         if (res.data !== "Please login first") {
           Setting.showMessage(
             "error",
-            `${i18next.t("application:Failed to sign in")}: ${res.msg}`,
+            `${i18next.t("application:Failed to sign in")}: ${res.msg}`
           );
         }
       }
@@ -658,14 +658,14 @@ class App extends Component {
       <React.Fragment>
         {!this.state.account ? null : (
           <div
-            style={{ display: "none" }}
+            style={{display: "none"}}
             id="CasdoorApplicationName"
             value={this.state.account.signupApplication}
           />
         )}
         {!this.state.account ? null : (
           <div
-            style={{ display: "none" }}
+            style={{display: "none"}}
             id="CasdoorAccessToken"
             value={this.state.accessToken}
           />
@@ -678,7 +678,7 @@ class App extends Component {
         >
           {footerHtml && footerHtml !== "" ? (
             <React.Fragment>
-              <div dangerouslySetInnerHTML={{ __html: footerHtml }} />
+              <div dangerouslySetInnerHTML={{__html: footerHtml}} />
             </React.Fragment>
           ) : Conf.CustomFooter !== null ? (
             Conf.CustomFooter
@@ -687,7 +687,7 @@ class App extends Component {
               Powered by{" "}
               <a target="_blank" href="https://casdoor.org" rel="noreferrer">
                 <img
-                  style={{ paddingBottom: "3px" }}
+                  style={{paddingBottom: "3px"}}
                   height={"20px"}
                   alt={"Casdoor"}
                   src={logo}
@@ -721,26 +721,26 @@ class App extends Component {
             </Tooltip>
             <a
               className="custom-link"
-              style={{ float: "right", marginTop: "2px" }}
+              style={{float: "right", marginTop: "2px"}}
               target="_blank"
               rel="noreferrer"
               href={`${Conf.AiAssistantUrl}`}
             >
               <ShareAltOutlined
                 className="custom-link"
-                style={{ fontSize: "20px", color: "rgb(140,140,140)" }}
+                style={{fontSize: "20px", color: "rgb(140,140,140)"}}
               />
             </a>
             <a
               className="custom-link"
-              style={{ float: "right", marginRight: "30px", marginTop: "2px" }}
+              style={{float: "right", marginRight: "30px", marginTop: "2px"}}
               target="_blank"
               rel="noreferrer"
               href={"https://github.com/casibase/casibase"}
             >
               <GithubOutlined
                 className="custom-link"
-                style={{ fontSize: "20px", color: "rgb(140,140,140)" }}
+                style={{fontSize: "20px", color: "rgb(140,140,140)"}}
               />
             </a>
           </React.Fragment>
@@ -792,7 +792,7 @@ class App extends Component {
     );
   }
 
-  onClick = ({ key }) => {
+  onClick = ({key}) => {
     if (key !== "/swagger" && key !== "/records") {
       if (this.state.requiredEnableMfa) {
         Setting.showMessage("info", "Please enable MFA first!");
@@ -840,7 +840,7 @@ class App extends Component {
       return (
         <ConfigProvider
           locale={getAntdLocale(Setting.getLanguage())}
-          spin={{ indicator: <AiDots /> }}
+          spin={{indicator: <AiDots />}}
           theme={{
             token: {
               ...shadcnThemeToken,
@@ -856,7 +856,7 @@ class App extends Component {
             transformers={[legacyLogicalPropertiesTransformer]}
           >
             <Layout id="parent-area">
-              <Content style={{ display: "flex", justifyContent: "center" }}>
+              <Content style={{display: "flex", justifyContent: "center"}}>
                 {this.isEntryPages() ? (
                   <EntryPage
                     account={this.state.account}
@@ -918,7 +918,7 @@ class App extends Component {
                           status="404"
                           title="404 NOT FOUND"
                           subTitle={i18next.t(
-                            "general:Sorry, the page you visited does not exist.",
+                            "general:Sorry, the page you visited does not exist."
                           )}
                           extra={
                             <a href="/">
@@ -963,7 +963,7 @@ class App extends Component {
                 onChangeTheme={this.setTheme}
                 onClick={this.onClick}
                 onfinish={() => {
-                  this.setState({ requiredEnableMfa: false });
+                  this.setState({requiredEnableMfa: false});
                 }}
                 openAiAssistant={() => {
                   this.setState({
@@ -977,7 +977,7 @@ class App extends Component {
                   });
                   localStorage.setItem(
                     "themeAlgorithm",
-                    JSON.stringify(nextThemeAlgorithm),
+                    JSON.stringify(nextThemeAlgorithm)
                   );
                 }}
                 setLogoutState={() => {
@@ -1012,11 +1012,11 @@ class App extends Component {
         showIcon={false}
         closable
         message={
-          <div style={{ textAlign: "center" }}>
-            <InfoCircleFilled style={{ color: "rgb(87,52,211)" }} />
+          <div style={{textAlign: "center"}}>
+            <InfoCircleFilled style={{color: "rgb(87,52,211)"}} />
             &nbsp;&nbsp;
             {i18next.t(
-              "general:Found some texts still not translated? Please help us translate at",
+              "general:Found some texts still not translated? Please help us translate at"
             )}
             &nbsp;
             <a
@@ -1051,7 +1051,7 @@ class App extends Component {
         )}
         <ConfigProvider
           locale={getAntdLocale(Setting.getLanguage())}
-          spin={{ indicator: <AiDots /> }}
+          spin={{indicator: <AiDots />}}
           theme={{
             token: {
               ...shadcnThemeToken,
